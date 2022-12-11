@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mini snake</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    } 
+
+    :root{
+     --dark:#211e20; 
+     --primary:#a0a08b;
+     --secondary:#555568;
+     --ligth:#e9efec;
+    }
+
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: var(--dark);
+    }
+    #canvas{
+      outline: var(--ligth) 4px solid;
+    }
+  </style>
+</head>
+<body>
+  <canvas 
+    id="canvas"
+    width="400px"
+    height="400px"
+  ></canvas>
+  <script src="./index.js"></script>
+</body>
+</html>
