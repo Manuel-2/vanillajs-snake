@@ -40,8 +40,8 @@ window.addEventListener('keydown',(event)=>{
     inputs.forEach(input =>{
       if(input === key){
         const newDirection = directionsToVector[direction]
-        const xcom = currentDirection.x * newDirection.x 
-        const ycom = currentDirection.y * newDirection.y
+        const xcom = lastDirection.x * newDirection.x 
+        const ycom = lastDirection.y * newDirection.y
         // avoid going in reverse
         if(xcom === 0 && ycom === 0){
           currentDirection = newDirection
@@ -62,14 +62,15 @@ startTimer(TPS)
 
 
 function tick(){
-  //clean last
+  // clean last
   ctx.clearRect(0,0,width,height)
  
+  // calculate new positions
   moveSnakeParts()
   moveHead() 
   
+  // render the result
   snake.forEach(part=>{
-    // render
     ctx.fillStyle = colors.primary
     ctx.fillRect(part.x,part.y,snakePartSize,snakePartSize) 
   })  
@@ -87,7 +88,6 @@ function moveHead(){
   const newposX = head.x + currentDirection.x * snakePartSize
   const newposY = head.y + currentDirection.y * snakePartSize
 
-
   for (let i = 1; i <= snake.length-1; i++) {
     const part = snake[i];
     if(part.x === newposX && part.y === newposY){
@@ -97,6 +97,7 @@ function moveHead(){
   
   head.x = newposX
   head.y = newposY
+  lastDirection = currentDirection
 }
 
 function setUpSnake(initialSize){
