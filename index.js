@@ -61,13 +61,21 @@ startTimer(TPS)
 
 
 function tick(){
+  //clean last
+  ctx.clearRect(0,0,width,height)
+
   moveHead() 
   // moveSnakeParts()
+  
+  snake.forEach(part=>{
+    // render
+    ctx.fillStyle = colors.primary
+    ctx.fillRect(part.x,part.y,snakePartSize,snakePartSize) 
+  })  
 }
 
 function moveSnakeParts(){
-  for (let i = snake.length; i > 0; i--) {
-    
+  for (let i = snake.length; i > 0; i--) {    
     console.log(i)
     const part = snake[i] 
     part.x = snake[i-1].x
@@ -75,23 +83,15 @@ function moveSnakeParts(){
   }
 }
 
-function moveHead(){
-  //clean last
-  ctx.clearRect(head.x,head.y,snakePartSize,snakePartSize)
-   
-  // calculate next position   
+function moveHead(){   
   head.x += currentDirection.x * snakePartSize     
-  head.y += currentDirection.y * snakePartSize 
-  
-  // render
-  ctx.fillStyle = colors.primary
-  ctx.fillRect(head.x,head.y,snakePartSize,snakePartSize)
+  head.y += currentDirection.y * snakePartSize   
 }
 
 function setUpSnake(initialSize){
-  for (let i = 1; i <= initialSize; i++) {
-    const posX = head.x + ((currentDirection.x * -1) * (i*snakePartSize/2))
-    const posY = head.y + ((currentDirection.y * -1) * (i*snakePartSize/2))
+  for (let i = 1; i <= initialSize-1; i++) {
+    const posX = head.x + ((currentDirection.x * -1) * (i*snakePartSize))
+    const posY = head.y + ((currentDirection.y * -1) * (i*snakePartSize))
     growSnake(posX,posY) 
   }
 }
