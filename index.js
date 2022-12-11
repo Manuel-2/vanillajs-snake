@@ -56,16 +56,16 @@ const head = {
   y: (height/2)-(snakePartSize/2)
 }
 const snake = [head]
-setUpSnake(3)
+setUpSnake(5)
 startTimer(TPS)
 
 
 function tick(){
   //clean last
   ctx.clearRect(0,0,width,height)
-
+ 
+  moveSnakeParts()
   moveHead() 
-  // moveSnakeParts()
   
   snake.forEach(part=>{
     // render
@@ -75,8 +75,7 @@ function tick(){
 }
 
 function moveSnakeParts(){
-  for (let i = snake.length; i > 0; i--) {    
-    console.log(i)
+  for (let i = snake.length-1; i > 0; i--) {    
     const part = snake[i] 
     part.x = snake[i-1].x
     part.y = snake[i-1].y
