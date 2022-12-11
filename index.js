@@ -19,8 +19,8 @@ const height = 500
 canvas.width = width
 canvas.height = height
 
-const snakePartSize = 40
-const TPS = 1 
+const snakePartSize = 16
+const TPS = 4 
 
 const directionsToVector = {
   up:{x:0,y:-1},
@@ -29,6 +29,7 @@ const directionsToVector = {
   left:{x:-1,y:0}
 }
 let currentDirection = directionsToVector.up
+let lastDirection = currentDirection
 
 // inputs
 window.addEventListener('keydown',(event)=>{
@@ -56,7 +57,7 @@ const head = {
   y: (height/2)-(snakePartSize/2)
 }
 const snake = [head]
-setUpSnake(5)
+setUpSnake(9)
 startTimer(TPS)
 
 
@@ -83,8 +84,19 @@ function moveSnakeParts(){
 }
 
 function moveHead(){   
-  head.x += currentDirection.x * snakePartSize     
-  head.y += currentDirection.y * snakePartSize   
+  const newposX = head.x + currentDirection.x * snakePartSize
+  const newposY = head.y + currentDirection.y * snakePartSize
+
+
+  for (let i = 1; i <= snake.length-1; i++) {
+    const part = snake[i];
+    if(part.x === newposX && part.y === newposY){
+      alert('gameOver')
+    } 
+  }
+  
+  head.x = newposX
+  head.y = newposY
 }
 
 function setUpSnake(initialSize){
