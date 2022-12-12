@@ -57,9 +57,8 @@ const head = {
   y: (height/2)-(snakePartSize/2)
 }
 const snake = [head]
-setUpSnake(9)
+setUpSnake(4)
 startTimer(TPS)
-
 
 function tick(){
   // clean last
@@ -70,10 +69,10 @@ function tick(){
   moveHead() 
   
   // render the result
-  snake.forEach(part=>{
+  snake.forEach((part)=>{
     ctx.fillStyle = colors.primary
     ctx.fillRect(part.x,part.y,snakePartSize,snakePartSize) 
-  })  
+  })
 }
 
 function moveSnakeParts(){
@@ -98,6 +97,10 @@ function moveHead(){
   head.x = newposX
   head.y = newposY
   lastDirection = currentDirection
+}
+
+function generateApple(){
+  
 }
 
 function setUpSnake(initialSize){
